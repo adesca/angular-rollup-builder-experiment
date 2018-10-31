@@ -1,0 +1,24 @@
+{
+  "name": "rollup-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "builders": "builders.json",
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.10.3",
+    "@angular-devkit/core": "^7.0.3",
+    "@types/node": "^10.12.1",
+    "typescript": "^3.1.4"
+  },
+  "dependencies": {
+    "rollup": "^0.66.6",
+    "rollup-plugin-angular": "^0.5.3",
+    "rollup-plugin-typescript": "^1.0.0"
+  }
+}

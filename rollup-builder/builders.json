@@ -1,0 +1,10 @@
+{
+  "$schema": "@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "rollup": {
+      "class": "./rollup.builder.js",
+      "schema": "./rollup-options.schema.json",
+      "description": "builder that rolls up angular project into a umd module"
+    }
+  }
+}
