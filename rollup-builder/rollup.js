@@ -18,7 +18,7 @@ const outputOptions = {
     name: 'rolled-up-app'
 };
 
-async function build() {
+export async function build() {
     const bundle = await rollup.rollup(inputOptions);
 
     // console.log(bundle.modules);
@@ -26,4 +26,4 @@ async function build() {
     await bundle.write(outputOptions);
 }
 
-build();
+// build();

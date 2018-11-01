@@ -106,7 +106,10 @@
             ]
           }
         },
-
+        "rollup": {
+          "builder": "../rollup-builder:rollup",
+          "options": {}
+        }
       }
     },
     "sample-project-e2e": {

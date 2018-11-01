@@ -1,5 +1,5 @@
 {
-  "id"; "RollupBuilderSchema",
+  "id": "RollupBuilderSchema",
   "title": "Rollup",
   "descriptoin": "Rollup builder options",
   "properties": {
