@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sample-project": {
+    "container": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sample-project",
+            "outputPath": "dist/container",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,9 +29,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/systemjs/dist/system.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -63,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sample-project:build"
+            "browserTarget": "container:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sample-project:build:production"
+              "browserTarget": "container:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sample-project:build"
+            "browserTarget": "container:build"
           }
         },
         "test": {
@@ -105,23 +103,10 @@
               "**/node_modules/**"
             ]
           }
-        },
-        "rollup": {
-          "builder": "../rollup-builder:rollup",
-          "options": {
-            "main": "spa-entry.ts",
-            "outputPath": "../container/src/assets",
-            "importReplacements": [
-              {
-                "replace": "src/environments/environment",
-                "with": "src/environments/environment.prod"
-              }
-            ]
-          }
         }
       }
     },
-    "sample-project-e2e": {
+    "container-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -130,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "sample-project:serve"
+            "devServerTarget": "container:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "sample-project:serve:production"
+              "devServerTarget": "container:serve:production"
             }
           }
         },
@@ -150,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "sample-project"
+  "defaultProject": "container"
 }

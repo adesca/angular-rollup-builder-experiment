@@ -3,6 +3,58 @@
   "title": "Rollup",
   "descriptoin": "Rollup builder options",
   "properties": {
-
+    "main": {
+      "type": "string",
+      "description": "The full path for the main entry point to the app, relative to the current workspace.",
+      "$valueDescription": "fileName"
+    },
+    "polyfills": {
+      "type": "string",
+      "description": "The full path for the polyfills file, relative to the current workspace."
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "The full path for the TypeScript configuration file, relative to the current workspace.",
+      "default": "src/tsconfig.app.json"
+    },
+    "importReplacements": {
+      "description": "Replace import strings with alternative import strings",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/replacement"
+      },
+      "default": []
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The full path for the new output directory, relative to the current workspace.\n\nBy default, writes output to a folder named dist/ in the current project."
+    },
+    "sourceMap": {
+      "type": "boolean",
+      "description": "Output sourcemaps.",
+      "default": true
+    }
+  },
+  "required": [
+    "outputPath",
+    "main"
+  ],
+  "definitions": {
+    "replacement":   {
+      "type": "object",
+      "properties": {
+        "replace": {
+          "type": "string"
+        },
+        "with": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "replace",
+        "with"
+      ]
+    }
   }
 }
