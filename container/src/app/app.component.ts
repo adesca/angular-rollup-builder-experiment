@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, NgModuleRef, OnInit, PlatformRef, ViewChild} from '@angular/core';
 import {System} from 'systemjs';
 
 @Component({
@@ -9,6 +9,9 @@ import {System} from 'systemjs';
 export class AppComponent implements OnInit {
   private SystemJS: System = window['System'];
   title = 'container';
+  @ViewChild('mountPoint') mountPoint: ElementRef;
+
+  constructor(private platformRef: PlatformRef) {}
 
   ngOnInit(): void {
    this.ngOnInitAsync().then(() => console.log('load was successful')
@@ -20,15 +23,19 @@ export class AppComponent implements OnInit {
     const module: Module<ExternalDoStuffModule> = await this.SystemJS.import('/assets/out.js');
     console.log('imported module ', module);
     module.default.doStuff();
+    module.default.mount(this.platformRef, this.mountPoint.nativeElement).then(bootstrappedModule => {
+      console.log('bootstrap completed with this module ', bootstrappedModule);
+    });
   }
 
 
 }
 
-class Module<T> {
-  default: T;
+interface Module<T> {
+  default: T;N
 }
 
-class ExternalDoStuffModule {
+interface ExternalDoStuffModule {
   doStuff: () => void;
+  mount: (PlatformRef, HTMLElement) => Promise<NgModuleRef<any>>;
 }

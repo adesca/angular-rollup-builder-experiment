@@ -11,8 +11,11 @@ import {Replacement, RollupOptionsSchema} from "./rollup-options.schema";
 import {join} from "path";
 
 const TypescriptPlugin = require('rollup-plugin-typescript');
+const AngularPlugin = require('rollup-plugin-angular');
+// const ResolvePlugin = require('rollup-plugin-node-resolve');
 // const ReplacePlugin = require('rollup-plugin-replace');
 import replace from 'rollup-plugin-replace';
+import resolve from 'rollup-plugin-node-resolve';
 
 // const inputOptions = {
 //     input: 'main.ts',
@@ -41,10 +44,10 @@ export default class RollupBuilder implements Builder<RollupOptionsSchema> {
         let normalizedFileReplacements = normalizeFileReplacements(builderConfig.options.importReplacements);
         const replacementPlugin = setupReplacePlugin(normalizedFileReplacements);
 
-
+        const resolvePlugin = setupResolvePlugin();
         const rollupInputOptions: RollupFileOptions = {
             input: builderConfig.options.main,
-            plugins: [TypescriptPlugin(), replacementPlugin ]
+            plugins: [TypescriptPlugin(), resolvePlugin, replacementPlugin ]
         };
 
         const rollupOutputOptions: OutputOptions = {
@@ -66,6 +69,14 @@ export default class RollupBuilder implements Builder<RollupOptionsSchema> {
 
     }
 }
+
+const setupResolvePlugin = () => {
+    return resolve({
+        jsnext: true,
+        main: true,
+        browser: true
+    })
+};
 
 const setupReplacePlugin = (fileReplacements: Replacement[]) => {
     const replacementValuesObj = {};

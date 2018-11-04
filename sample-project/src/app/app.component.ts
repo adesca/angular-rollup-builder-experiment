@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {System} from "systemjs";
+import {System} from 'systemjs';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root-inner-project',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   systemJS: System = window['System'];
 
   ngOnInit(): void {
-    this.systemJS.import('/assets/out.js');
+    // this.systemJS.import('/assets/out.js');
   }
 }
