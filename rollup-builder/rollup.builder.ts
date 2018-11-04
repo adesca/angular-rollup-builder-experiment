@@ -10,12 +10,15 @@ import {catchError, map, tap} from "rxjs/operators";
 import {Replacement, RollupOptionsSchema} from "./rollup-options.schema";
 import {join} from "path";
 
-const TypescriptPlugin = require('rollup-plugin-typescript');
+// const TypescriptPlugin = require('rollup-plugin-typescript');
 const AngularPlugin = require('rollup-plugin-angular');
 // const ResolvePlugin = require('rollup-plugin-node-resolve');
 // const ReplacePlugin = require('rollup-plugin-replace');
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
+import typescript from 'rollup-plugin-typescript';
+import angular from 'rollup-plugin-angular';
+import sass from 'node-sass';
 
 // const inputOptions = {
 //     input: 'main.ts',
@@ -45,9 +48,10 @@ export default class RollupBuilder implements Builder<RollupOptionsSchema> {
         const replacementPlugin = setupReplacePlugin(normalizedFileReplacements);
 
         const resolvePlugin = setupResolvePlugin();
+        const angularPlugin = setupAngularPlugin();
         const rollupInputOptions: RollupFileOptions = {
             input: builderConfig.options.main,
-            plugins: [TypescriptPlugin(), resolvePlugin, replacementPlugin ]
+            plugins: [angularPlugin, typescript(), resolvePlugin, replacementPlugin ]
         };
 
         const rollupOutputOptions: OutputOptions = {
@@ -69,6 +73,16 @@ export default class RollupBuilder implements Builder<RollupOptionsSchema> {
 
     }
 }
+
+const setupAngularPlugin = () => {
+    return angular({
+        preprocessors: {
+            style: scss => {
+                return sass.renderSync({data: scss}).css;
+            }
+        }
+    })
+};
 
 const setupResolvePlugin = () => {
     return resolve({

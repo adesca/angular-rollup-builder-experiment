@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgModuleRef, OnInit, PlatformRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgModuleRef, NgZone, OnInit, PlatformRef, ViewChild} from '@angular/core';
 import {System} from 'systemjs';
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'container';
   @ViewChild('mountPoint') mountPoint: ElementRef;
 
-  constructor(private platformRef: PlatformRef) {}
+  constructor(private ngZone: NgZone) {}
 
   ngOnInit(): void {
    this.ngOnInitAsync().then(() => console.log('load was successful')
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     const module: Module<ExternalDoStuffModule> = await this.SystemJS.import('/assets/out.js');
     console.log('imported module ', module);
     module.default.doStuff();
-    module.default.mount(this.platformRef, this.mountPoint.nativeElement).then(bootstrappedModule => {
+    module.default.mount(this.ngZone, this.mountPoint.nativeElement).then(bootstrappedModule => {
       console.log('bootstrap completed with this module ', bootstrappedModule);
     });
   }
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 }
 
 interface Module<T> {
-  default: T;N
+  default: T;
 }
 
 interface ExternalDoStuffModule {

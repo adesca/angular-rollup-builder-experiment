@@ -115,6 +115,10 @@
               {
                 "replace": "src/environments/environment",
                 "with": "src/environments/environment.prod"
+              },
+              {
+                "replace": "./environments/environment",
+                "with": "./environments/environment.prod"
               }
             ]
           }
