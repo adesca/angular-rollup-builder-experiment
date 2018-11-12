@@ -7,7 +7,9 @@ Features:
 - Can bundle an angular project by inlining the html and scss
 
 ToDo:
-- Support adding polyfills
+- Not needed: ~Support adding polyfills~ 
 - Support being able to set a specific tsconfig
 - Support outputting sourcemaps based on configuration property
 - Swap out file content instead of swapping import strings
+- Add option to build factory instead of rolling up entire project
+- NPM post install should add a rollup-builder command to angular.json in the project it was installed under

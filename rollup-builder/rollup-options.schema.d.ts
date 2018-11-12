@@ -11,24 +11,9 @@ export interface RollupOptionsSchema {
     main: string;
 
     /**
-     * The name of the polyfills file.
-     */
-    polyfills?: string;
-
-    /**
      * The name of the TypeScript configuration file.
      */
     tsConfig: string;
-
-    // /**
-    //  * Global scripts to be included in the build.
-    //  */
-    // scripts: ExtraEntryPoint[];
-    //
-    // /**
-    //  * Global styles to be included in the build.
-    //  */
-    // styles: ExtraEntryPoint[];
 
     /**
      * Replace files with other files in the build.
